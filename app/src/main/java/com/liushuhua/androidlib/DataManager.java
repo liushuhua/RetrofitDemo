@@ -3,6 +3,9 @@ package com.liushuhua.androidlib;
 import com.liushuhua.androidlib.model.Book;
 import com.liushuhua.androidlib.model.Motto;
 
+import java.util.Map;
+
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import rx.Observable;
 
@@ -47,6 +50,7 @@ public class DataManager {
 
     /**
      * 获取名人名言
+     *
      * @param apiKey
      * @param keyword
      * @param page
@@ -67,4 +71,14 @@ public class DataManager {
         return api.downloadFile(path);
     }
 
+    /**
+     * 上传文件
+     *
+     * @param description 描述
+     * @param params      参数
+     * @return result
+     */
+    public Observable<ResponseBody> uploadFile(String description, Map<String, RequestBody> params) {
+        return api.uploadFile(description, params);
+    }
 }

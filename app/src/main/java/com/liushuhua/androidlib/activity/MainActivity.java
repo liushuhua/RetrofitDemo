@@ -9,11 +9,14 @@ import com.liushuhua.androidlib.model.Motto;
 import com.liushuhua.androidlib.present.BookPresent;
 import com.liushuhua.androidlib.present.DownloadPresent;
 import com.liushuhua.androidlib.present.MottoPresent;
+import com.liushuhua.androidlib.present.UploadPresent;
 import com.liushuhua.androidlib.view.BookView;
 import com.liushuhua.androidlib.view.MottoView;
 import com.liushuhua.androidlib.view.ProgressView;
+import com.liushuhua.androidlib.view.UploadView;
 import com.liushuhua.baseutils.LogUtils;
 
+import java.io.File;
 import java.util.List;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
@@ -21,6 +24,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private BookPresent bookPresent = new BookPresent();
     private DownloadPresent downloadPresent = new DownloadPresent();
     private MottoPresent mottoPresent = new MottoPresent();
+    private UploadPresent uploadPresent = new UploadPresent();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         findViewById(R.id.textView).setOnClickListener(this);
         findViewById(R.id.download).setOnClickListener(this);
+        findViewById(R.id.upload).setOnClickListener(this);
         findViewById(R.id.motto).setOnClickListener(this);
     }
 
@@ -44,6 +49,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mottoPresent.onCreate();
         mottoPresent.attachView(mottoView);
 
+        uploadPresent.onCreate();
+        uploadPresent.attachView(uploadView);
+
     }
 
     @Override
@@ -54,14 +62,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             downloadPresent.downloadFile("qqteam/AndroidQQ/mobileqq_android.apk", "mobileqq_android.apk");
         } else if (v.getId() == R.id.motto) {
             mottoPresent.getMottoList("7ff49d067102772f69d7b4f26c380287", "人才", 1, 20);
+        } else if (v.getId() == R.id.upload) {
+            uploadPresent.uploadFile("test", new File(""));
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-    }
 
     private BookView bookView = new BookView() {
 
@@ -110,5 +115,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         public void onFail(String error) {
             LogUtils.e(TAG, "onFail: " + error);
         }
+    };
+
+    private UploadView uploadView = new UploadView() {
     };
 }

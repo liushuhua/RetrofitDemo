@@ -8,5 +8,6 @@ package com.liushuhua.androidlib;
 public class Constant {
     //url前缀-下载
     public static final String BASE_URL = "http://qd.myapp.com/myapp/";
-//    public static final String BASE_URL = "http://apistore.baidu.com/";
+    //book
+//    public static final String BASE_URL = " https://api.douban.com/v2/";
 }

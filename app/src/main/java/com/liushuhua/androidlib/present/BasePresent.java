@@ -10,9 +10,9 @@ import com.liushuhua.androidlib.view.View;
 
 abstract class BasePresent {
 
-    abstract void attachView(View view);
+    abstract public void attachView(View view);
 
-    abstract void onCreate();
+    abstract public void onCreate();
 
-    abstract void onStop();
+    abstract public void onStop();
 }
