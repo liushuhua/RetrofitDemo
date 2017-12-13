@@ -118,5 +118,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     };
 
     private UploadView uploadView = new UploadView() {
+        @Override
+        public void onFail(String error) {
+            LogUtils.e(TAG, "onError: " + error);
+        }
+
+        @Override
+        public void onSuccess(String error) {
+
+        }
     };
 }

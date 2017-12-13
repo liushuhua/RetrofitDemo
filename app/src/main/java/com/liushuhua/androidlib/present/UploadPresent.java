@@ -19,7 +19,7 @@ import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by liushuhua on 17-12-13.
- * Description:
+ * Description:上传文件
  */
 
 public class UploadPresent extends BasePresent {
@@ -76,17 +76,19 @@ public class UploadPresent extends BasePresent {
                 subscribe(new Observer<ResponseBody>() {
                     @Override
                     public void onCompleted() {
-
+                        //TODO 后续完善
+                        onStop();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        uploadView.onFail(e.getMessage());
+                        onStop();
                     }
 
                     @Override
                     public void onNext(ResponseBody responseBody) {
-
+                        //TODO 后续完善
                     }
                 }));
     }

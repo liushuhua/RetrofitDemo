@@ -5,5 +5,8 @@ package com.liushuhua.androidlib.view;
  * Description:
  */
 
-public class UploadView implements View {
+public interface UploadView extends View {
+    void onFail(String error);
+
+    void onSuccess(String error);
 }
