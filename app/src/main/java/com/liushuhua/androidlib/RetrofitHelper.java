@@ -30,10 +30,6 @@ public class RetrofitHelper {
                 if (helper == null) {
                     helper = new RetrofitHelper();
                 }
-
-
-
-
             }
         }
         return helper;
