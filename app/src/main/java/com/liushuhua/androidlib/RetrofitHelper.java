@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -29,6 +30,10 @@ public class RetrofitHelper {
                 if (helper == null) {
                     helper = new RetrofitHelper();
                 }
+
+
+
+
             }
         }
         return helper;
@@ -39,9 +44,13 @@ public class RetrofitHelper {
         File cacheFile = new File(MyApplication.getMyApplicationContext().getCacheDir(), "respond");
         int cacheSize = 10 * 1024 * 1024; // 10 MiB
         Cache cache = new Cache(cacheFile, cacheSize);
+        //Http-logging
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.NONE);
         //初始化Retrofit,单例模式，避免资源的浪费
         OkHttpClient client = new OkHttpClient.Builder().
                 addInterceptor(new CacheInterceptor()).
+                addInterceptor(interceptor).
                 cache(cache).
                 connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS).
                 build();
