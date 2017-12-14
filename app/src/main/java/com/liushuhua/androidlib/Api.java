@@ -25,6 +25,13 @@ import rx.Observable;
  */
 
 public interface Api {
+
+    //url前缀-下载
+//    String BASE_URL = "http://qd.myapp.com/myapp/";
+
+    //book
+    String BASE_URL = " https://api.douban.com/v2/";
+
     @GET("book/search")
     Observable<Book> searchBook(@Query("q") String name, @Query("tag") String tag, @Query("start") int start, @Query("count") int count);
 

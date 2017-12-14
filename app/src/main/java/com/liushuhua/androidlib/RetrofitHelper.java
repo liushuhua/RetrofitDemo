@@ -46,7 +46,7 @@ public class RetrofitHelper {
                 connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS).
                 build();
         retrofit = new Retrofit.Builder().
-                baseUrl(Constant.BASE_URL).
+                baseUrl(Api.BASE_URL).
                 client(client).
                 addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setLenient().create())).
                 addCallAdapterFactory(RxJavaCallAdapterFactory.create()).
