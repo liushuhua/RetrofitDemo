@@ -1,7 +1,12 @@
 package com.liushuhua.androidlib;
 
 import com.google.gson.GsonBuilder;
+import com.liushuhua.androidlib.interceptor.CacheInterceptor;
 
+import java.io.File;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -14,6 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitHelper {
 
+    private static final long DEFAULT_TIMEOUT = 60;
     private static volatile RetrofitHelper helper;
     private Retrofit retrofit;
 
@@ -29,10 +35,19 @@ public class RetrofitHelper {
     }
 
     private RetrofitHelper() {
+        //创建Cache文件
+        File cacheFile = new File(MyApplication.getMyApplicationContext().getCacheDir(), "respond");
+        int cacheSize = 10 * 1024 * 1024; // 10 MiB
+        Cache cache = new Cache(cacheFile, cacheSize);
         //初始化Retrofit,单例模式，避免资源的浪费
+        OkHttpClient client = new OkHttpClient.Builder().
+                addInterceptor(new CacheInterceptor()).
+                cache(cache).
+                connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS).
+                build();
         retrofit = new Retrofit.Builder().
                 baseUrl(Constant.BASE_URL).
-                client(new OkHttpClient()).
+                client(client).
                 addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setLenient().create())).
                 addCallAdapterFactory(RxJavaCallAdapterFactory.create()).
                 build();
