@@ -1,6 +1,7 @@
 package com.liushuhua.androidlib.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.liushuhua.androidlib.R;
@@ -34,6 +35,58 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.download).setOnClickListener(this);
         findViewById(R.id.upload).setOnClickListener(this);
         findViewById(R.id.motto).setOnClickListener(this);
+        if (savedInstanceState != null)
+            LogUtils.i(TAG, "onCreate: " + savedInstanceState.getString("tip"));
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LogUtils.i(TAG, "onStart: ");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.i(TAG, "onRestart: ");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG, "onResume: ");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i(TAG, "onPause: ");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i(TAG, "onStop: ");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "onDestroy: ");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        String tip = "tip";
+        outState.putSerializable("tip", tip);
+        Log.i(TAG, "onSaveInstanceState: ");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.i(TAG, "onRestoreInstanceState: "+savedInstanceState.getString("tip"));
     }
 
     @Override
